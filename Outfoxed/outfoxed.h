@@ -58,6 +58,10 @@ extern const Suspect suspects [NUMBER_OF_SUSPECTS];
 
 /* (1) Chicken detectives.  There are 4 of them. */
 #define NUMBER_OF_DETECTIVES 4
+typedef struct {
+    Suspect suspect;
+    
+}
 
 /* Each detective thread will execute the chicken_detective_thread
  * function, which you must implement.  A detective thread must return

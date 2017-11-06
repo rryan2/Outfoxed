@@ -1,9 +1,38 @@
 #include "outfoxed.h"
 #include <stdlib.h>
-// #include <pthread>
+#include <stdio.h>
+#include <pthread.h>
 
-static void int main(int argc, char const *argv[]) {
+struct detective_strcuct {
+  Suspect suspect;
+};
+
+static int main(int argc, char const *argv[]) {
+
   /* code */
+
+//create chiken detectives threads
+  pthread_t tids[NUMBER_OF_DETECTIVES];
+  struct detective_strcuct args[NUMBER_OF_DETECTIVES];
+  int i;
+  for (i = 0; i < NUMBER_OF_DETECTIVES; i++)
+  {
+    pthread_attr_t attr;
+    pthread_attr_init(&sttr);
+    pthread_create(&tids[i], &attr, chicken_detective_thread, &args[i]);
+  }
+
+  //wait for threads are done
+  int j;
+  for (j = 0; j < NUMBER_OF_DETECTIVES; j++)
+  {
+    pthread_join(tids[j], NULL);
+    if (args[j] != NULL) //reveals the suspect
+    {
+      //print the suspect and set up a new game--optional
+    }
+  }
+
   return 0;
 }
 
@@ -14,7 +43,8 @@ static void int main(int argc, char const *argv[]) {
  */
 extern void * chicken_detective_thread(void *)
 {
-
+  //assign the suspect if null or not
+  pthread_exit(0);
 }
 
 /* Suspects.  Whenever a new suspect card is turned over, a new thread
