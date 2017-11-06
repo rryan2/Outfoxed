@@ -1,6 +1,6 @@
 #include "outfoxed.h"
 #include <stdlib.h>
-#include <pthread>
+// #include <pthread>
 
 static void int main(int argc, char const *argv[]) {
   /* code */
