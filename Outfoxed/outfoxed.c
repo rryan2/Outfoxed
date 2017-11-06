@@ -12,13 +12,23 @@ static int main(int argc, char const *argv[]) {
   /* code */
 
 //create chiken detectives threads
+create_detective_threads();
+
+
+  return 0;
+}
+/*
+ * create the multi-threads for four chicked threads
+ */
+extern void create_detective_threads()
+{
   pthread_t tids[NUMBER_OF_DETECTIVES];
   struct detective_strcuct args[NUMBER_OF_DETECTIVES];
   int i;
   for (i = 0; i < NUMBER_OF_DETECTIVES; i++)
   {
     pthread_attr_t attr;
-    pthread_attr_init(&sttr);
+    pthread_attr_init(&attr);
     pthread_create(&tids[i], &attr, chicken_detective_thread, &args[i]);
   }
 
@@ -29,13 +39,11 @@ static int main(int argc, char const *argv[]) {
     pthread_join(tids[j], NULL);
     if (args[j] != NULL) //reveals the suspect
     {
+      announce_thief(args[j]->suspect);
       //print the suspect and set up a new game--optional
     }
   }
-
-  return 0;
 }
-
 
 /* Each detective thread will execute the chicken_detective_thread
  * function.  A detective thread must return
@@ -43,6 +51,7 @@ static int main(int argc, char const *argv[]) {
  */
 extern void * chicken_detective_thread(void *)
 {
+  //eliminate_suspect
   //assign the suspect if null or not
   pthread_exit(0);
 }
@@ -57,6 +66,7 @@ extern void * chicken_detective_thread(void *)
 extern void * new_suspect_thread(void * suspect)
 {
 
+
 }
 
 /* (3) Clues. Each clue shows up in a separate thread.
@@ -68,7 +78,14 @@ extern void * new_suspect_thread(void * suspect)
  *
  * Clue (thread)s must also return before the game can end.
  */
-extern void * hat_thread(void *);
+extern void * hat_thread(void * arg)
+{
+  pthread_attr_t attr;
+  pthread_attr_init(&attr);
+  pthread_t tid;
+  pthread_create(&tid, &attr, decoded_clue, &arg);
+
+}
 extern void * umbrella_thread(void *);
 extern void * glasses_thread(void *);
 extern void * monocle_thread(void *);
