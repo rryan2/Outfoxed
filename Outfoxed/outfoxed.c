@@ -1,4 +1,4 @@
-#include <outfoxed.h>
+#include "outfoxed.h"
 #include <stdlib.h>
 #include <pthread>
 
