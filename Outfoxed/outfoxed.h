@@ -58,10 +58,7 @@ extern const Suspect suspects [NUMBER_OF_SUSPECTS];
 
 /* (1) Chicken detectives.  There are 4 of them. */
 #define NUMBER_OF_DETECTIVES 4
-typedef struct {
-    Suspect suspect;
-    
-}
+
 
 /* Each detective thread will execute the chicken_detective_thread
  * function, which you must implement.  A detective thread must return
@@ -110,6 +107,9 @@ extern void * watch_thread(void *);
 extern void * necklace_thread(void *);
 extern void * briefcase_thread(void *);
 extern void * scarf_thread(void *);
+extern void check_for_clues(enum Clue clue);
+extern void check_for_eliminate(int);
+
 
 /* Clue threads call this function to decode a clue.
  *
@@ -126,6 +126,7 @@ extern void setup_play(void);
 
 /* Call this function to prints the name of a clue. */
 extern const char * clue_name(const enum Clue clue);
+//necklace umbrella monocle flower briefcase watch glasses cane coat hat gloves scarf
 
 /*
  * Write your code in a program 'outfoxed.c', then build your program like so:
